@@ -1,0 +1,5 @@
+tenso.c:13:5:HX711_Average_Value	24	static
+tenso.c:25:5:HX711_Value	16	static
+tenso.c:58:6:HX711_Tare	24	static
+tenso.c:64:6:HX711_Calibration	16	static
+tenso.c:69:5:HX711_Value_Gram	16	static
