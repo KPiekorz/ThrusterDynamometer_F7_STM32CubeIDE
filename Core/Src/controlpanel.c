@@ -39,7 +39,7 @@ static uint32_t start_ms;
 void vTaskSendData(void *p){
 
 	char frame[150];
-	uint16_t frame_length = 0;
+//	uint16_t frame_length = 0;
 	uint32_t ulNotifiedValue = 0x0;
 	start_ms = 0;
 	pausa_time = 0;
@@ -243,7 +243,7 @@ void vTaskReceivedData(void *p){
 				case START_PWM: {
 
 					duty = 0;
-					HAL_TIM_PWM_Start_DMA(&htim8, TIM_CHANNEL_1, &duty, 1);
+					HAL_TIM_PWM_Start_DMA(&htim8, TIM_CHANNEL_1, (uint32_t*)&duty, 1);
 
 					break;
 				}
@@ -548,7 +548,7 @@ void extract_arg(CMD_MODE_t *cmd, char * received_command){
 
 	}
 	argument[j] = '\0';
-	sscanf(argument, "%d", &(cmd->num)); // numer komendy
+	sscanf(argument, "%d", (int*)&((cmd->num))); // numer komendy
 
 	memset(argument, '\0', sizeof(argument));
 	j = 0; i++;
@@ -560,7 +560,7 @@ void extract_arg(CMD_MODE_t *cmd, char * received_command){
 
 	}
 	argument[j] = '\0';
-	sscanf(argument, "%d", &(cmd->arg)); // duty lub tenso kalibracja
+	sscanf(argument, "%d", (int*)&(cmd->arg)); // duty lub tenso kalibracja
 
 	memset(argument, '\0', sizeof(argument));
 	j = 0; i++;
@@ -572,7 +572,7 @@ void extract_arg(CMD_MODE_t *cmd, char * received_command){
 
 	}
 	argument[j] = '\0';
-	sscanf(argument, "%d", &(cmd->rise_time)); // rise time
+	sscanf(argument, "%d", (int*)&(cmd->rise_time)); // rise time
 
 	memset(argument, '\0', sizeof(argument));
 	j = 0; i++;
@@ -584,7 +584,7 @@ void extract_arg(CMD_MODE_t *cmd, char * received_command){
 
 	}
 	argument[j] = '\0';
-	sscanf(argument, "%d", &(cmd->stay_time)); // stay time
+	sscanf(argument, "%d", (int*)&(cmd->stay_time)); // stay time
 
 	memset(argument, '\0', sizeof(argument));
 	j = 0; i++;
@@ -596,7 +596,7 @@ void extract_arg(CMD_MODE_t *cmd, char * received_command){
 
 	}
 	argument[j] = '\0';
-	sscanf(argument, "%d", &(cmd->fall_time)); // fall time
+	sscanf(argument, "%d", (int*)&(cmd->fall_time)); // fall time
 
 }
 

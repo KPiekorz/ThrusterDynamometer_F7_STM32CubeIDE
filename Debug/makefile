@@ -53,6 +53,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 ThrusterDynamometer_F7_STM32CubeIDE.list \
 
+OBJCOPY_HEX += \
+ThrusterDynamometer_F7_STM32CubeIDE.hex \
+
 OBJCOPY_BIN += \
 ThrusterDynamometer_F7_STM32CubeIDE.bin \
 
@@ -76,6 +79,11 @@ ThrusterDynamometer_F7_STM32CubeIDE.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+ThrusterDynamometer_F7_STM32CubeIDE.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "ThrusterDynamometer_F7_STM32CubeIDE.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 ThrusterDynamometer_F7_STM32CubeIDE.bin: $(EXECUTABLES)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "ThrusterDynamometer_F7_STM32CubeIDE.bin"
 	@echo 'Finished building: $@'
@@ -86,7 +94,7 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:
